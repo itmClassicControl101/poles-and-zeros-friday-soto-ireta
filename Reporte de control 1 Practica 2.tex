@@ -1,0 +1,339 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage[spanish]{babel}
+%\usepackage[backref=page]{hyperref}
+\usepackage[hidelinks]{hyperref} 
+\lstset{language=Scilab, breaklines=true, basicstyle=\footnotesize}
+\lstset{numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=-8pt}
+
+\setcounter{secnumdepth}{0} 
+\setcounter{tocdepth}{1} 
+\newcounter{ns}
+\addtocounter{ns}{1} 
+\graphicspath{{figuras/}}
+
+\renewcommand{\figurename}{Figura}
+
+\begin{document}
+	
+	\begin{titlepage}
+		
+		\begin{center}
+			\vspace*{-1in}
+			\begin{figure}[htb]
+				\begin{center}
+					\includegraphics[width=8cm]{Figura7}
+				\end{center}
+			\end{figure}
+			
+		\begin{large}
+				Instituto Tecnologico de Morelia\\
+				"Jose Maria Morelos y Pavon"\\
+		\end{large}
+			\vspace*{0.15in}
+		\begin{large}
+			Departamento de Ingeniería Electrónica\\
+		\end{large}
+			\vspace*{0.4in}
+			
+			\begin{Large}
+				\textbf{Reporte de Practica No. 2 Poles and Zeros found by Inspection} \\
+			\end{Large}
+			\vspace*{0.3in}
+			\begin{large}
+				M.C: Gerardo Marx Chavez-Campos.\\
+				Materia: Control 1.\\
+				Alumnos:\\
+				 		David Ireta Cazarez No. Ctrl. 13120127.\\
+						Edgar Soto Martinez No. Ctrl. 12121155.\\
+				Fecha: 1/11/2017\\
+			\end{large}
+			\rule{80mm}{0.1mm}\\
+			\vspace*{0.1in}
+		\end{center}
+		
+	\end{titlepage}
+
+%___________Termina Portada______________________________________________
+	
+	\section*{Introducción}
+	
+	En ste reporte mostraremos la forma de obtener  la función de transferencia de dos formas distintas, los métodos que usaremos seran el de inspeccion y el algebraico. El método de inspeccion es la forma mas sencilla y rapida de encontrar la función de transferencia, por lo cual obtenemos los polos y raíces y con el metodo algebraico es mas largo y laborioso ya lo mostraremos mas adelante.\\
+	
+	Utilizamos un circuito de primer orden donde utilizamos 3 resistencias y un inductor. Con este sistema encontramos la funcion de transferencia de los metodos ya mencionados, tambien obtuvimos las simulaciones utilizando el software de LTspice y se hicieron mediciones en laboratorio para obterner el factor de tiempo Tau ($\tau$) y posteriormente realizamos un barrido de frecuencia para poder ver su comportamiento.
+	
+	\section*{Metodología}
+	
+	El circuito que utilizamos para nuestra practica fue el que se muestra en la siguiente figura 1:
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=6cm]{Figura21}
+		\caption{Circuito RL}
+		\label{fig:figura100}
+	\end{figure}	
+	
+	Basandonos en el circuito de la Figura 1 pudimos obtener la funcion de transferencia con el metodo de inspección y con el metodo algebraico obtuvimos la ganancia, los polos y los ceros.
+	
+	\section*{Función de transferencia mediante el metodo de inspección}
+	
+	Tenemos que hacer el analisis del sistema para s=0 en CD, una vez haciendo esto podemos obtener $G_0$, ya que el inductor cuando hay corriente directa se hace corto por lo tanto tenemos un voltaje de salida:
+	
+	\begin{equation*}
+		V_o= V_i\left(\frac{R2//R3}{R2//R3 + R1}\right)
+	\end{equation*}\\
+	
+	Por lo tanto la ganancia de corriente directa es:\\
+	
+	\begin{equation*}
+		G_o= \frac{R2//R3}{R2//R3+R1}
+	\end{equation*}
+	
+	Por lo tanto nuestro polo es:
+	
+	\begin{equation*}
+		w_p1=\frac{1}{\tau}=\frac{1}{\frac{L}{Req}}=\frac{Req}{L}=\frac{R2+R1//R3}{L}
+	\end{equation*}
+	
+	Por lo tanto nuestra funcion de transferencia es:
+	
+	\begin{equation*}
+		H_s=G_o\left(\frac{\left(1+\frac{s}{w_z1}\right)}{\left(1+\frac{s}{w_p1}\right)}\right)=\left(\frac{R2//R3}{R2//R3+R1}\right)=\left(\frac{\left(1+\frac{sL}{R2}\right)}{\left(1+\frac{sL}{R2+R1//R3}\right)}\right)
+	\end{equation*}	
+	
+	\section*{Funcion de transferencia mediante el metodo algebraico}
+	
+	Para obtener la funcion de transferencia con este método, es mediante la obtencion de voltaje de salida entre el voltaje de entrada y se realiza mediante un divisor de tension.
+	
+	Obtenemos el paralelo de las resistencias:
+	
+	\begin{equation*}
+		Z_in//R3 =\frac{R3(sL+R2)}{R3+sL+R2}
+	\end{equation*}
+	
+	
+	Se obtiene $H_s$ que es la funcion de transferencia:
+	
+	\begin{equation*}
+		H_s= \left(\frac{R2/R3}{R2//R3+R1}\right)\left(\frac{1+\frac{sL}{R2}}{1+\frac{sL}{R2+R1//R3}}\right)
+	\end{equation*}
+	
+	\newpage
+	\section*{Resultados Experimentales}	
+	
+	Le dimos valores a los componentes de la figura 2:
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=6cm]{Figura22}
+		\caption{Circuito RL con valores propuestos}
+		\label{fig:figura100}
+	\end{figure}
+
+	Introducimos los valores propuestos de nuestros componentes a la funcion de transferencia obtenida:
+	
+	
+	
+	\begin{equation*}
+		H_s= \left(\frac{R2/R3}{R2//R3+R1}\right)\left(\frac{1+\frac{sL}{R2}}{1+\frac{sL}{R2+R1//R3}}\right)
+	\end{equation*}
+	
+	\begin{equation*}
+		H_s=\frac{50000000+93s}{560000000+111.6s}
+	\end{equation*}
+	
+	La señal de entrada fue de 5Vpp por lo tanto la señal escalon fue de 5:
+	
+	\begin{equation*}
+		Vout_s=\frac{5}{s}*\frac{50000000+93s}{560000000+111.6s}=\frac{1}{s}*\frac{250000000+465s}{560000000+111.6s}
+	\end{equation*}
+
+	Al obtener los resultados anteriores, los pusimos en el codigo generado en Scilab y con eso obtuvimos los siguientes resultados y con su grafica:
+	
+	\begin{lstlisting}
+		clear all
+		clc
+		s=poly(0,"s");
+		disp('Con la ecuacion obtenida:');//Mensaje en pantalla
+		disp('Ys=(1/s)*(((b*s)+c)/((d*s)+a))');//Mensaje en pantalla
+		a=input('Ingrese el numero de a:');//valor a
+		b=input('Ingrese el numero de b:');//valor b
+		c=input('Ingrese el numero de c:');//valor c
+		d=input('Ingrese el numero de d:');//valor d
+		FT=(c/(a*%s))+(((b/d)-(c/a))/((%s)+a));//Funcion de transferencia para Y(s)
+		A=(c/(a*%s));//Fraccion Parcial
+		B=(((b/d)-(c/a))/((%s)+a));//Fraccion Parcial
+		disp('Y(s) es:');//Mostrar Y(s)
+		Ys=[A B];//Guardar A y B
+		disp(Ys);//Mostrar Y(s)
+		t=0:0.0000000001:0.000003;//t tomara valores de 0 a 20 cada 0.01 valores
+		Y(t)=(c/a)+(((b/d)-(c/a))*exp(-a*t));//Y(t) sera la salida en funcion del tiempo
+		plot(t,Y(t))//Graficar Y(t) con respecto a t
+		title('Funcion de transferencia en el tiempo')//Titulo de la grafica
+		xlabel('Tiempo t')"
+	\end{lstlisting}
+		
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=6cm]{Figura27}
+		\caption{ Respuesta de la funcion de transferencia.}
+		\label{fig:figura100}
+	\end{figure}
+		
+	\begin{equation}
+		\tau=\frac{L}{R}=\frac{L1}{R_{eq}}=\frac{L1}{R2+(R1//R3)}=\frac{1.86mH}{9.33K\Omega}=0.199{\mu}s
+	\end{equation}
+	
+	Se usó la herramienta PSpice para poder observar el tiempo de respuesta en voltaje y la respuesta en frecuencia de nuestro circuito.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=6cm]{Figura24}
+		\caption{ Código introducido en el cuadro de texto dentro de PSpice para simular el circuito de la \textbf{figura 2} con nuestros valores propuestos.}
+		\label{fig:figura100}
+	\end{figure}
+	
+	Al correr el programa pudimos observar la figura que nos muestra la respuesta en frecuencia en decibeles y en voltaje el $ Vout_{s} $:
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=6cm]{Figura25}
+		\caption{  Se muestra el comportamiento del voltaje con respecto a la frecuencia y la respuesta en decibeles con respecto a la frecuencia..}
+		\label{fig:figura100}
+	\end{figure}
+	
+	En la práctica física del circuito se hizo un barrido de frecuencias por décadas de 100Hz a 2MHz, obteniendo así solamente 4 décadas por la limitante del generador de señales, llegando a su tope. A continuación se muestra la tabla de valores que obtuvimos en el laboratorio al realizar el barrido de frecuencia.
+	
+	\newpage
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			\textbf{Hz} & \textbf{V}\\
+			\hline
+			100 & 0.54\\
+			\hline	
+			200 & 0.54\\
+			\hline
+			300 & 0.54\\
+			\hline
+			400 & 0.54\\
+			\hline
+			500 & 0.54\\
+			\hline
+			600 & 0.54\\
+			\hline
+			700 & 0.54\\
+			\hline
+			800 & 0.54\\
+			\hline
+			900 & 0.52\\
+			\hline
+			1,000 & 0.52\\
+			\hline
+			2,000 & 0.52\\
+			\hline
+			3,000 & 0.52\\
+			\hline
+			4,000 & 0.52\\
+			\hline
+			5,000 & 0.52\\
+			\hline
+			6,000 & 0.52\\
+			\hline
+			7,000 & 0.52\\
+			\hline
+			8,000 & 0.52\\
+			\hline
+			9,000 & 0.52\\
+			\hline
+			10,000 & 0.52\\
+			\hline
+			20,000 & 0.52\\
+			\hline
+			30,000 & 0.52\\
+			\hline
+			40,000 & 0.568\\
+			\hline
+			50,000 & 0.608\\
+			\hline
+			60,000 & 0.64\\
+			\hline
+			70,000 & 0.656\\
+			\hline
+			80,000 & 0.688\\
+			\hline
+			90,000 & 0.76\\
+			\hline
+			100,000 & 0.82\\
+			\hline
+			200,000 & 3.4\\
+			\hline
+			300,000 & 3.6\\
+			\hline
+			400,000 & 3.61\\
+			\hline
+			500,000 & 3.45\\
+			\hline
+			600,000 & 1.12\\
+			\hline
+			700,000 & 0.96\\
+			\hline
+			800,000 & 0.80\\
+			\hline
+			900,000 & 0.72\\
+			\hline
+			1,000,000 & 0.72\\
+			\hline
+			
+		\end{tabular}
+		\caption*{\textbf{Tabla 1.} Valores obtenidos del barrido de frecuencia en el circuito físico.}
+	\end{table}
+
+	\newpage
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=6cm]{Figura23}
+		\caption{ Gráfica del comportamiento del voltaje con respecto a la frecuencia.}
+		\label{fig:figura100}
+	\end{figure}
+	
+	Para que un circuito RC o RL pueda funcionar de manera estable, siempre se toman 5 tiempos $ \tau $ para asegurar que la forma de onda no varíe, esto se implementa en la práctica principalmente. En nuestro caso, nuestro tiempo $ \tau $ fue de 0.199$ \mu $s, entonces este valor es multiplicado por 5 para confirmar su estabilidad:
+	
+	\begin{equation}
+	0.199{\mu}s*5=0.996{\mu}s
+	\end{equation}
+	
+	En la \textbf{figura 6} se muestra una gráfica de la forma de onda del circuito RL.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=6cm]{Figura26}
+		\caption{Forma de onda del voltaje de salida Vout de nuestro circuito con una amplitud de 2.54V.}
+		\label{fig:figura100}
+	\end{figure}
+	
+	Al multiplicar este valor medido de nuestro circuito por 0.63, que es el 63\% del voltaje en el que la onda se estabilizará, obtenemos un voltaje de 1.602V.
+	
+	\newpage
+	\section*{Conclusiones}
+	
+	Ireta Cazarez David. No. Ctrl. 13120127
+	
+	En esta practica pudimos observar mas detalladamente lo que es la funcion de transferencia. Tambien pudimos observar como se comportaban los circuitos gracias al simulador LTspice y me parecio algo muy interesante ya que lo teorico como lo practica conocordo perfectamente. Nos costo algo de trabajo obtener la funcion de transferencia por el metodo algebraico ya que no se parecia nada a lo de inspeccion.\\
+	
+	Soto Martinez Edgar. No. Ctrl. 12121155
+	
+	En esta práctica se observo la aplicacion de la funcion de transferencia la cual puede ser obtenida de cualquier sistema en nuestro caso de un circuito RL, el poder obtener y visualizar los tiempos de carga y descarga y poder obtener el tau y poder realizar comparaciones de lo practico con lo obtenido en PSpice.	
+
+\end{document}
+
